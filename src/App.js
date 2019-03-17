@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './kanye.png';
 import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      quote : "burn that excel spread sheet"
+    }
+    
+    this.updateQuote = this.updateQuote.bind(this);
+  }
+
+  componentDidMount(){
+    this.updateQuote();
+  }
+
+  updateQuote(){
+    setInterval(()=>fetch('https://api.kanye.rest')
+                      .then((response)=> response.json())
+                      .then((json) => this.setState({
+                        quote: json.quote
+                      })), 10000)
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            {this.state.quote}
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          ~ Kanye
       </div>
     );
   }
