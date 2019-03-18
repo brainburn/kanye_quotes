@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/png" href="./kanye.png"/>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <style>
+        .App {
+            text-align: center;
+        }
+
+        .App-logo {
+            animation: App-logo-spin infinite 20s linear;
+            pointer-events: none;
+            margin-top:100px;
+            margin-bottom: 100px;
+        }
+
+        @keyframes App-logo-spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <title>Kanye Says</title>
+  </head>
+  <body>
+    <div class="App">
+        <img src="kanye.png" class="App-logo" alt="logo" />
+        <p id="quote">
+        </p>
+        ~ Kanye
+      </div>
+              
+    <script>
+        fetch('https://api.kanye.rest')
+            .then((response)=> response.json())
+            .then((json) => document.getElementById("quote").innerHTML=json.quote)
+        setInterval(()=>fetch('https://api.kanye.rest')
+            .then((response)=> response.json())
+            .then((json) => document.getElementById("quote").innerHTML=json.quote), 10000);
+
+    </script>
+  </body>
+</html>
